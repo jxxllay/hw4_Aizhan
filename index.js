@@ -37,28 +37,30 @@ const products = [
 ]
 
 function filter() {
-    const filtered = products.filter(product => {
-        if (product.category === 'food') {
+    const filtered = products.filter(({ category }) => {
+        if (category === 'food') {
             return true
-        } else if (product.category === 'tool')
+        } else if (category === 'tool')
             return true
+//         return category === 'food' || category === 'tool'
     })
+    
     console.log(filtered)
 }
 
 filter()
 
 function name() {
-    const cleaned = products.map(name => {
-        return `${name.productName}`
+    const cleaned = products.map(({ productName }) => {
+        return productName
     })
     console.log(cleaned)
 }
 
 name()
 
-const categories = products.reduce((accumalator, product) => {
-    accumalator[product.category]++
+const categories = products.reduce((accumalator, { category }) => {
+    accumalator[category]++
     return accumalator
 }, {
     tool: 0,
@@ -68,12 +70,12 @@ const categories = products.reduce((accumalator, product) => {
 console.log(categories)
 
 function render() {
-    products.map(function (product) {
+    products.map(function ({ productName, cost, category }) {
         `
             <div class="product">
-                    <h3>${product.productName}</h3>
-                    <p>${product.cost} </p>
-                     <p>${product.category} </p>
+                    <h3>${productName}</h3>
+                    <p>${cost} </p>
+                     <p>${category} </p>
                 </div>`
     })
     console.log(products)
